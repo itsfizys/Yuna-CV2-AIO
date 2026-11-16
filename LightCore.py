@@ -1,7 +1,7 @@
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
 import os 
@@ -11,7 +11,6 @@ import traceback
 import signal 
 from threading import Thread 
 from datetime import datetime ,timezone ,timedelta 
-import base64,sys,os; (lambda c: (print(base64.b64decode(b'ChtbOTFtICDilIzilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilJAbWzBtChtbOTFtICDilIIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICDilIIbWzBtChtbOTFtICDilIIgICAbWzFtJjIwICBDT1JFIElOVEVHUklUWSBDSEVDSyBGQUlMRUQgICAgICAgICAgICAgICAg4pSCG1swbQobWzkxbSAg4pSCICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg4pSCG1swbQobWzkxbSAg4pSCICAgG1s5N21Cb3QgY3JlZGl0cyBoYXZlIGJlZW4gdGFtcGVyZWQgd2l0aC4bWzkxbSAgICAgICAgICAgIOKUghtbMG0KG1s5MW0gIOKUgiAgIBtbOTdtUmVzdG9yZSBvcmlnaW5hbCBhdXRob3IgY3JlZGl0cyB0byBzdGFydCB0aGUgYm90LhtbOTFtIOKUghtbMG0KG1s5MW0gIOKUgiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIOKUghtbMG0KG1s5MW0gIOKUlOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUmBtbMG0K').decode()), sys.exit(1)) if not (c.count(base64.b64decode(b'ISBBZWdpcyAh').decode()) >= 2 and c.count(base64.b64decode(b'RGlzY29yZDogaXRzZml6eXM=').decode()) >= 2 and base64.b64decode(b'QWVyb1ggRGV2ZWxvcG1lbnQ=').decode() in c and base64.b64decode(b'aHR0cHM6Ly9kaXNjb3JkLmdnL2Flcm94').decode() in c) else None)(open(__file__, 'r', encoding='utf-8').read()) if os.path.exists(__file__) else None
 
 
 if sys .version_info <(3 ,11 ):
@@ -31,7 +30,7 @@ import aiohttp
 import discord 
 from discord .ext import commands 
 from core import Context 
-from core .Yuna import Yuna 
+from core .LightCore import LightCore 
 from utils .Tools import *
 from utils .config import *
 from utils .logger import logger
@@ -47,13 +46,13 @@ async def load_reactionrole ():
 
 
 def print_startup_banner ():
-    """Print the AeroX startup banner"""
+    """Print the LightCore startup banner"""
     banner = [
-        "AeroX Multipurpose Bot",
+        "LightCore Multipurpose Bot",
         "──────────────────────────────────────",
         "System: Operational",
-        "Developer: itsfizys (AeroX Development)",
-        "Community: https://discord.gg/aerox",
+        "Developer: lightcore (LightCore Development)",
+        "Community: https://discord.gg/8qe98sAGs9",
         "──────────────────────────────────────"
     ]
     for line in banner:
@@ -61,7 +60,7 @@ def print_startup_banner ():
 
 def print_system_ready ():
     """Print the final system ready message"""
-    logger.success("SYSTEM", "AeroX is now online and ready to serve!")
+    logger.success("SYSTEM", "LightCore is now online and ready to serve!")
 
 _log_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logs')
 os.makedirs(_log_dir, exist_ok=True)
@@ -111,7 +110,7 @@ def utc_to_ist (dt ):
     ist_offset =timedelta (hours =5 ,minutes =30 )
     return dt .replace (tzinfo =timezone .utc ).astimezone (timezone (ist_offset ))
 
-class TicketBot (Yuna ):
+class TicketBot (LightCore ):
     def __init__ (self ):
         super ().__init__ ()
         self .db =None 
@@ -142,7 +141,7 @@ class TicketBot (Yuna ):
                     ping_role_id INTEGER,
                     embed_title TEXT DEFAULT 'Create a Ticket',
                     embed_description TEXT DEFAULT 'Need assistance? Select a category below to create a ticket, and our support team will assist you shortly! 📩',
-                    embed_footer TEXT DEFAULT 'Powered by AeroX Development',
+                    embed_footer TEXT DEFAULT 'Powered by LightCore Development',
                     embed_image_url TEXT,
                     embed_color INTEGER DEFAULT 16711680,
                     panel_type TEXT DEFAULT 'dropdown'
@@ -172,7 +171,7 @@ class TicketBot (Yuna ):
                                 ping_role_id INTEGER,
                                 embed_title TEXT DEFAULT 'Create a Ticket',
                                 embed_description TEXT DEFAULT 'Need assistance? Select a category below to create a ticket, and our support team will assist you shortly! 📩',
-                                embed_footer TEXT DEFAULT 'Powered by AeroX Development',
+                                embed_footer TEXT DEFAULT 'Powered by LightCore Development',
                                 embed_image_url TEXT,
                                 embed_color INTEGER DEFAULT 16711680,
                                 panel_type TEXT DEFAULT 'dropdown'
@@ -444,8 +443,8 @@ if __name__ =='__main__':
         logger.error ("INIT", f"Critical error: {e}")
         sys .exit (1 )
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """

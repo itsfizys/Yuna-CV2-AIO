@@ -1,7 +1,7 @@
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
 from utils import getConfig 
@@ -22,7 +22,7 @@ class Mention (commands .Cog ):
 
         self .color =0x000000 
 
-        self .bot_name ="Yuna"
+        self .bot_name ="LightCore"
         self .bot .loop .create_task (self .setup_database ())
 
     async def setup_database (self ):
@@ -103,15 +103,15 @@ class Mention (commands .Cog ):
 
                 content = (
                     f"### 👋 Hey [{message.author.display_name}](https://discord.com/users/{message.author.id})!\n"
-                    f"I'm **Yuna**, your intelligent and friendly companion. <a:ButterflyWhite:1479361913812025386>\n"
+                    f"I'm **LightCore**, your intelligent and friendly companion. <a:ButterflyWhite:1479361913812025386>\n"
                     f"> - **Server Prefix:** `{prefix}`\n"
                     f"> - **Total Commands:** `{self.bot.total_commands if hasattr(self.bot, 'total_commands') else '81'}`\n"
-                    f"> - **Developer:** [itsfizys](https://discord.com/users/1124248109472550993)"
+                    f"> - **Developer:** [lightcore](https://discord.com/users/1124248109472550993)"
                 )
                 container.add_item(ui.TextDisplay(content))
                 view.add_item(container)
                 await message .channel .send (view=view)
 """
-: ! Aegis !
-    + Discord: itsfizys
+: ! LightCore !
+    + Discord: lightcore
 """

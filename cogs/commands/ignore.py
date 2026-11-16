@@ -1,7 +1,7 @@
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
 from __future__ import annotations
@@ -140,7 +140,7 @@ class Ignore(commands.Cog):
       count = await cursor.fetchone()
 
       if count[0] >= 30:
-        await self.send_message(ctx, title="<:Yuna_notify:1227866804630720565> Access Denied", description="You can only add up to 30 channels to the ignore list.")
+        await self.send_message(ctx, title="<:LightCore_notify:1227866804630720565> Access Denied", description="You can only add up to 30 channels to the ignore list.")
         return
 
       cursor = await db.execute("SELECT channel_id FROM ignored_channels WHERE guild_id = ? AND channel_id = ?", (ctx.guild.id, channel.id))
@@ -205,7 +205,7 @@ class Ignore(commands.Cog):
       count = await cursor.fetchone()
 
       if count[0] >= 30:
-        await self.send_message(ctx, title="<:Yuna_notify:1227866804630720565> Access Denied", description="You can only add up to 30 users to the ignore list.")
+        await self.send_message(ctx, title="<:LightCore_notify:1227866804630720565> Access Denied", description="You can only add up to 30 users to the ignore list.")
         return
 
       cursor = await db.execute("SELECT user_id FROM ignored_users WHERE guild_id = ? AND user_id = ?", (ctx.guild.id, user.id))
@@ -316,8 +316,8 @@ class Ignore(commands.Cog):
 
 
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """

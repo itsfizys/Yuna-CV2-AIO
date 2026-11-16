@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🤖 Yuna Discord Bot — Component V2
+# 🤖 LightCore Discord Bot — Component V2
 
 
 *A premium multipurpose Discord bot featuring high-end Antinuke, Automod, and next-gen UI.*
@@ -13,9 +13,9 @@
 
 ---
 
-## ✨ What is Yuna?
+## ✨ What is LightCore?
 
-**Yuna** is a state-of-the-art multipurpose Discord bot designed for performance and security. Powered by the **Component V2** architecture, Yuna delivers a premium user experience with sleek layouts and advanced functionality.
+**LightCore** is a state-of-the-art multipurpose Discord bot designed for performance and security. Powered by the **Component V2** architecture, LightCore delivers a premium user experience with sleek layouts and advanced functionality.
 
 **Current Stats:**
 - 🛠️ **99 Cogs** loaded with specialized logic.
@@ -46,7 +46,7 @@
 
 4. **Run the bot**
    ```bash
-   python aerox.py
+   python LightCore.py
    ```
 
 ## ⚙️ Configuration Guide
@@ -69,10 +69,10 @@ BOT_PREFIX=!
 
 ### 👨‍💻 Development Team
 
-**Developer:** Aegis  
-**Discord:** `itsfizys`  
-**Community:** AeroX Development  
-**Discord Server:** [discord.gg/aerox](https://discord.gg/aerox)
+**Developer:** LightCore  
+**Discord:** `lightcore`  
+**Community:** LightCore Development  
+**Discord Server:** [discord.gg/8qe98sAGs9](https://discord.gg/8qe98sAGs9)
 
 ---
 
@@ -96,7 +96,7 @@ For licensing inquiries: https://discord.gg/odx
 
 ---
 
-**Made with ❤️ by [AeroX Development](https://discord.gg/aerox)**
+**Made with ❤️ by [LightCore Development](https://discord.gg/8qe98sAGs9)**
 
 *Based on Olympus • Powered by Python & Discord.py • Component V2 Interface*
 

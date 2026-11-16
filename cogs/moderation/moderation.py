@@ -1,7 +1,7 @@
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
 import discord 
@@ -12,7 +12,7 @@ import typing
 import typing as t 
 from typing import *
 from utils .Tools import *
-from core import Cog ,Yuna ,Context 
+from core import Cog ,LightCore ,Context 
 from discord .ext .commands import Converter 
 from discord .ext import commands ,tasks 
 from discord .ui import Button ,View 
@@ -1261,8 +1261,8 @@ Reason: `{entry.reason}`\n\n''')
 
 
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """

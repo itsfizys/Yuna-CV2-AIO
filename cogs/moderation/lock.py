@@ -1,7 +1,7 @@
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
 import discord 
@@ -41,7 +41,7 @@ class LockUnlockView (ui .View ):
         description =f"<:icons_channel:1381865641463517325>**Channel**: {self.channel.mention}\n<:icon_tick:1372375089668161597> **Status**: Unlocked\n<:Commands:1374327912496627843>**Reason:** Unlock request by {self.author}",
         color =0x000000 
         )
-        embed .add_field (name ="<:Yuna_staff:1228227884481515613> **Moderator:**",value =self .ctx .author .mention ,inline =False )
+        embed .add_field (name ="<:LightCore_staff:1228227884481515613> **Moderator:**",value =self .ctx .author .mention ,inline =False )
         embed .set_author (name =f"Successfully Unlocked {self.channel.name}",icon_url ="https://i.ibb.co/TxtQNnyH/2400e46b-9674-4142-b2dc-73244e769c3b.png")
         await self .message .edit (embed =embed ,view =self )
 
@@ -97,8 +97,8 @@ class Lock (commands .Cog ):
 
 
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """

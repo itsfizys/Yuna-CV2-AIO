@@ -1,7 +1,7 @@
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
 from __future__ import annotations 
@@ -169,7 +169,7 @@ class BetaRockPaperScissors (RockPaperScissors ):
         if ctx .author ==self .player2 :
             view =discord .ui .LayoutView ()
             container =discord .ui .Container (accent_color =None )
-            container .add_item (discord .ui .TextDisplay ("<:Yuna_notify:1227866804630720565> **Access Denied**\nYou cannot play against yourself!"))
+            container .add_item (discord .ui .TextDisplay ("<:LightCore_notify:1227866804630720565> **Access Denied**\nYou cannot play against yourself!"))
             view .add_item (container )
             return await ctx .reply (view =view )
 
@@ -201,8 +201,8 @@ class BetaRockPaperScissors (RockPaperScissors ):
         return self .message 
 
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
