@@ -49,55 +49,70 @@
    python LightCore.py
    ```
 
-## ☁️ Deploying (Render / Railway / Fly)
+## ☁️ Deploying on Render — Web Service (free tier)
 
-A Discord bot is a **background worker**: it connects outbound to Discord and never opens a port. If your host runs `gunicorn your_application.wsgi` and dies with `gunicorn: command not found`, it is configured as a **web service** — there is no WSGI app here.
-
-### Render — two supported setups
-
-**Option A — Background Worker (recommended, paid instances)**
+A Discord bot is a background process, so Render's default web-service start command (`gunicorn your_application.wsgi`) fails with `gunicorn: command not found`. LightCore fixes that by opening a real HTTP port while it runs.
 
 | Setting | Value |
 | --- | --- |
-| Type | **Background Worker** (not Web Service) |
+| Type | **Web Service** |
+| Runtime | Python |
 | Build Command | `pip install -r requirements.txt` |
 | Start Command | `python LightCore.py` |
-| Plan | Starter or higher (workers are not on the free tier) |
+| Health Check Path | `/health` |
+| Plan | Free (or higher) |
 
-**Option B — Web Service (works on the free tier)**
+`render.yaml` in this repo already contains exactly that — **New → Blueprint → pick this repo** and it configures itself.
 
-Set Type to **Web Service** and use the same commands. LightCore detects `$PORT`, serves `/` and `/health` on it, and runs the bot in the same process — so the health check passes and the deploy stays alive.
+### Why the health server exists
 
-A `render.yaml` blueprint ships both options; keep one and delete the other.
+`utils/health.py` binds `$PORT` (only when the variable is set) and serves:
 
-### Environment variables (either option)
+| Path | Response |
+| --- | --- |
+| `/` | plain-text "LightCore is running." |
+| `/health`, `/healthz` | JSON — `status`, `bot` tag, `guilds`, `latency_ms` |
+
+The bot still talks to Discord over the gateway; the HTTP port exists purely so the host's port scan and health check pass. Locally nothing changes — no `PORT`, no listener.
+
+### Environment variables
 
 ```env
-TOKEN=your_bot_token            # required
-OWNER_IDS=123456789012345678    # required for owner commands
-BOT_PREFIX=&                    # optional, defaults to &
-WEBHOOK_URL=                    # optional, command logging disabled if unset
-GROQ_API_KEY=                   # optional, AI commands
+TOKEN=your_bot_token        # required
+OWNER_IDS=123456789012345678 # required for owner commands
+BOT_PREFIX=&                 # optional, defaults to &
+WEBHOOK_URL=                 # optional, command logging off when unset
+GROQ_API_KEY=                # optional, AI commands
 ```
 
-`TOKEN` is the only hard requirement — the bot no longer refuses to start when `WEBHOOK_URL` or `BOT_PREFIX` are missing.
+### Free-tier caveats (important)
 
-### Railway / Fly / VPS
+1. **Spin-down.** Free instances sleep after a period without inbound traffic, which also drops the Discord gateway — commands go silent. Set a keep-alive so LightCore pings itself:
+   ```env
+   RENDER_EXTERNAL_URL          # set automatically by Render
+   KEEP_ALIVE=1                 # default; set 0 to disable
+   KEEP_ALIVE_INTERVAL=600      # seconds
+   ```
+   Or add a Render **Cron Job** hitting `https://<service>.onrender.com/health` every 10 minutes.
+2. **Ephemeral disk.** SQLite files in `db/` reset on every deploy, so prefixes, levels and tickets vanish. Render → your service → **Disks** → Add Disk (mount e.g. `/var/data`, 1 GB). This repo reads the `db/` paths from the working directory, so the simplest fix is to create a symlink at build time:
+   ```bash
+   # Build Command
+   pip install -r requirements.txt && mkdir -p /var/data/db && ln -sfn /var/data/db db
+   ```
+   Without a disk the bot still runs — it just forgets state between deploys.
+3. **One service only.** Run a single instance — two processes sharing one bot token will double-respond to commands.
+4. **Shutdown.** `SIGTERM` is handled so deploys close the gateway cleanly instead of crashing.
 
-Anywhere you can run a long-lived process:
+### Other hosts (Railway / Fly / VPS)
+
+Any long-lived process works — no port or web framework required:
 
 ```bash
 pip install -r requirements.txt
 python LightCore.py
 ```
 
-No port or web framework is required.
-
-### Notes
-
-- `runtime.txt` pins Python 3.11.9 (3.12+ can break some dependencies).
-- Data lives in local SQLite files under `db/`; on ephemeral filesystems (Render, Railway) attach a disk if you need persistence across deploys.
-
+`Procfile` declares both `web:` and `worker:` entries, so platforms that read it pick the right one. `runtime.txt` pins Python 3.11.9.
 
 ## ⚙️ Configuration Guide
 

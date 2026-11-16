@@ -119,7 +119,10 @@ class TicketBot (LightCore ):
         print_startup_banner ()
         logger.info("INIT", "Initializing database connection")
         try :
+            # WAL keeps the bot's writes fast while the health endpoint serves
+            # requests on the same event loop (free web services must answer fast).
             self .db =await aiosqlite .connect ("db/bot_database.db")
+            await self .db .execute ("PRAGMA journal_mode=WAL")
             if self .db is None :
                 raise Exception ("Failed to connect to database")
 
@@ -429,11 +432,19 @@ async def run_bot ():
     health_runner = None
     try:
         from utils import health
-        health_runner = await health.start()
+        health_runner = await health.start(client)
         if health_runner is not None:
             logger.info("INIT", f"Health server listening on port {os.environ.get('PORT')}")
     except Exception as e:
         logger.warn("INIT", f"Health server not started: {e}")
+
+    # Free web-service plans sleep without inbound traffic; keep the port warm.
+    keepalive_task = None
+    try:
+        from utils import keepalive
+        keepalive_task = await keepalive.start()
+    except Exception as e:
+        logger.warn("INIT", f"Keep-alive not started: {e}")
 
     try:
         logger.info("INIT", "Establishing connection to Discord")
@@ -448,6 +459,8 @@ async def run_bot ():
         if not client.is_closed():
             logger.info("INIT", "Shutdown signal received, stopping bot gracefully...")
             await client.close()
+        if keepalive_task is not None:
+            keepalive_task.cancel()
         if health_runner is not None:
             try:
                 await health_runner.cleanup()
@@ -455,8 +468,15 @@ async def run_bot ():
                 pass
         logger.success("INIT", "Bot shutdown completed gracefully")
 
+def _handle_sigterm(*_args):
+    """Render/Heroku send SIGTERM on deploys and restarts."""
+    logger.info("INIT", "SIGTERM received - shutting down")
+    raise KeyboardInterrupt
+
+
 if __name__ =='__main__':
     try :
+        signal.signal(signal.SIGTERM, _handle_sigterm)
         asyncio .run (run_bot ())
     except KeyboardInterrupt:
         logger.info("INIT", "Received keyboard interrupt, shutdown complete.")

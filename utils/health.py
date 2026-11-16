@@ -17,11 +17,33 @@
 
 import os
 
+import logging
+
 from aiohttp import web
+
+# Render's health checks would otherwise flood the logs every few seconds.
+logging.getLogger("aiohttp.access").setLevel(logging.WARNING)
 
 
 async def _health(request):
-    return web.json_response({"status": "ok", "service": "lightcore"})
+    client = request.app["client"]
+    try:
+        user = client.user
+    except Exception:
+        user = None
+    try:
+        guilds = len(client.guilds)
+    except Exception:
+        guilds = 0
+    return web.json_response({
+        # 200 once the gateway is connected and the bot is not closed, so the
+        # host's health check reflects the bot, not just a live port.
+        "status": "ok" if user else "starting",
+        "service": "lightcore",
+        "bot": str(user) if user else None,
+        "guilds": guilds,
+        "latency_ms": round(client.latency * 1000) if user else None,
+    })
 
 
 async def _root(request):
@@ -32,20 +54,21 @@ async def _root(request):
     )
 
 
-def _make_app():
+def _make_app(client=None):
     app = web.Application()
+    app["client"] = client
     app.router.add_get("/", _root)
     app.router.add_get("/health", _health)
     app.router.add_get("/healthz", _health)
     return app
 
 
-async def start():
+async def start(client=None):
     """Start the health server if PORT is set. Returns the runner or None."""
     port = os.environ.get("PORT")
     if not port:
         return None
-    runner = web.AppRunner(_make_app())
+    runner = web.AppRunner(_make_app(client))
     await runner.setup()
     site = web.TCPSite(runner, host="0.0.0.0", port=int(port))
     await site.start()

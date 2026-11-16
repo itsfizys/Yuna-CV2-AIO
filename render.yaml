@@ -1,35 +1,33 @@
-# Render Blueprint for LightCore (Discord bot)
+# Render Blueprint for LightCore — WEB SERVICE (free tier friendly)
 #
-# WHY THE OLD DEPLOY FAILED
-#   "bash: line 1: gunicorn: command not found" + "Running 'gunicorn
-#   your_application.wsgi'" means Render was running this as a *web service*,
-#   using the default start command. A Discord bot is not a WSGI/ASGI app: it
-#   connects outbound to Discord's gateway and never listens on a port. There is
-#   no gunicorn in requirements.txt, so the command cannot exist.
+# The previous deploy failed with:
+#   ==> Running 'gunicorn your_application.wsgi'
+#   bash: line 1: gunicorn: command not found   (exit 127)
 #
-# TWO WAYS TO RUN IT HERE
-#   1. type: worker  (paid instances) - no port needed, this is the clean setup.
-#   2. type: web     (works on the free tier) - LightCore detects $PORT and
-#                    serves /health on it while the bot runs.
+# Reason: Render ran this as a web service with its default start command.
+# A Discord bot is not a WSGI/ASGI app - it opens an outbound gateway
+# connection and never listens on a port, so gunicorn can never work here.
 #
-# Pick one: keep ONE of the two services below and delete the other.
+# This blueprint uses a WEB SERVICE with an explicit start command
+# (`python LightCore.py`) plus a real HTTP listener: LightCore binds $PORT and
+# serves / and /health while the bot runs in the same process (utils/health.py),
+# so Render's port scan and health check pass.
 
 services:
-  # ---------------------------------------------------------------- #
-  #  Option A - worker (paid plan)
-  # ---------------------------------------------------------------- #
-  - type: worker
+  - type: web
     name: lightcore
     runtime: python
-    plan: starter
+    plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: python LightCore.py
+    healthCheckPath: /health
     autoDeploy: true
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.9
       - key: BOT_PREFIX
         value: "&"
+      # sync:false -> Render asks you for these instead of storing them in git
       - key: TOKEN
         sync: false
       - key: OWNER_IDS
@@ -37,24 +35,11 @@ services:
       - key: WEBHOOK_URL
         sync: false
 
-  # ---------------------------------------------------------------- #
-  #  Option B - web service (free tier friendly)
-  #  LightCore exposes $PORT for the host; delete Option A if you use this.
-  # ---------------------------------------------------------------- #
-  # - type: web
-  #   name: lightcore
-  #   runtime: python
-  #   plan: free
-  #   buildCommand: pip install -r requirements.txt
-  #   startCommand: python LightCore.py
-  #   healthCheckPath: /health
-  #   autoDeploy: true
-  #   envVars:
-  #     - key: PYTHON_VERSION
-  #       value: 3.11.9
-  #     - key: BOT_PREFIX
-  #       value: "&"
-  #     - key: TOKEN
-  #       sync: false
-  #     - key: OWNER_IDS
-  #       sync: false
+# ---------------------------------------------------------------------------
+# Notes
+#  * Free web services without traffic get suspended and stop receiving events.
+#    If commands go silent after ~15 min, upgrade the plan or add a cron job
+#    that pings https://<your-service>.onrender.com/health every 10 minutes.
+#  * To run as a Background Worker instead (no port, paid instances) change
+#    `type: web` -> `type: worker`, drop `healthCheckPath` and `plan: free`.
+# ---------------------------------------------------------------------------
