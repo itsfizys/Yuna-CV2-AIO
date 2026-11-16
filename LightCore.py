@@ -358,7 +358,10 @@ async def on_command_completion (context :commands .Context )->None :
     split =full_command_name .split ("\n")
     executed_command =str (split [0 ])
     webhook_url =WEBHOOK_URL 
-    
+
+    if not webhook_url :  # logging webhook is optional
+        return
+
     if context .guild is not None :
         try :
             async with aiohttp .ClientSession ()as session :
@@ -409,16 +412,29 @@ if TOKEN is None :
     logger .error ("TOKEN environment variable not set in .env file. Please ensure your .env file contains the TOKEN.")
     raise ValueError ("TOKEN environment variable not set in .env file. Cannot start the bot.")
 
-if WEBHOOK_URL is None :
-    logger .error ("WEBHOOK_URL environment variable not set in .env file. Please ensure your .env file contains the WEBHOOK_URL.")
-    raise ValueError ("WEBHOOK_URL environment variable not set in .env file.")
+# WEBHOOK_URL is only used for optional command logging - don't kill the bot without it.
+if not WEBHOOK_URL :
+    logger .warn ("CONFIG", "WEBHOOK_URL not set - command logging webhook is disabled.")
+    WEBHOOK_URL = None
 
-if PREFIX is None :
-    logger .error ("PREFIX environment variable not set in .env file. Please ensure your .env file contains the PREFIX.")
-    raise ValueError ("PREFIX environment variable not set in .env file.")
+# BOT_PREFIX is optional; Tools.py already defaults to '&'.
+if not PREFIX :
+    logger .warn ("CONFIG", "BOT_PREFIX not set - defaulting to '&'.")
+    PREFIX = "&"
 
 async def run_bot ():
     """Run the bot with graceful shutdown handling"""
+    # Hosts that only offer web services (e.g. Render free tier) require an
+    # open port. Harmless locally - it only starts when PORT is set.
+    health_runner = None
+    try:
+        from utils import health
+        health_runner = await health.start()
+        if health_runner is not None:
+            logger.info("INIT", f"Health server listening on port {os.environ.get('PORT')}")
+    except Exception as e:
+        logger.warn("INIT", f"Health server not started: {e}")
+
     try:
         logger.info("INIT", "Establishing connection to Discord")
         await client.start(TOKEN)
@@ -432,6 +448,11 @@ async def run_bot ():
         if not client.is_closed():
             logger.info("INIT", "Shutdown signal received, stopping bot gracefully...")
             await client.close()
+        if health_runner is not None:
+            try:
+                await health_runner.cleanup()
+            except Exception:
+                pass
         logger.success("INIT", "Bot shutdown completed gracefully")
 
 if __name__ =='__main__':

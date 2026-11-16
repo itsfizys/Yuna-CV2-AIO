@@ -49,6 +49,56 @@
    python LightCore.py
    ```
 
+## ☁️ Deploying (Render / Railway / Fly)
+
+A Discord bot is a **background worker**: it connects outbound to Discord and never opens a port. If your host runs `gunicorn your_application.wsgi` and dies with `gunicorn: command not found`, it is configured as a **web service** — there is no WSGI app here.
+
+### Render — two supported setups
+
+**Option A — Background Worker (recommended, paid instances)**
+
+| Setting | Value |
+| --- | --- |
+| Type | **Background Worker** (not Web Service) |
+| Build Command | `pip install -r requirements.txt` |
+| Start Command | `python LightCore.py` |
+| Plan | Starter or higher (workers are not on the free tier) |
+
+**Option B — Web Service (works on the free tier)**
+
+Set Type to **Web Service** and use the same commands. LightCore detects `$PORT`, serves `/` and `/health` on it, and runs the bot in the same process — so the health check passes and the deploy stays alive.
+
+A `render.yaml` blueprint ships both options; keep one and delete the other.
+
+### Environment variables (either option)
+
+```env
+TOKEN=your_bot_token            # required
+OWNER_IDS=123456789012345678    # required for owner commands
+BOT_PREFIX=&                    # optional, defaults to &
+WEBHOOK_URL=                    # optional, command logging disabled if unset
+GROQ_API_KEY=                   # optional, AI commands
+```
+
+`TOKEN` is the only hard requirement — the bot no longer refuses to start when `WEBHOOK_URL` or `BOT_PREFIX` are missing.
+
+### Railway / Fly / VPS
+
+Anywhere you can run a long-lived process:
+
+```bash
+pip install -r requirements.txt
+python LightCore.py
+```
+
+No port or web framework is required.
+
+### Notes
+
+- `runtime.txt` pins Python 3.11.9 (3.12+ can break some dependencies).
+- Data lives in local SQLite files under `db/`; on ephemeral filesystems (Render, Railway) attach a disk if you need persistence across deploys.
+
+
 ## ⚙️ Configuration Guide
 
 ### ⚡ Bot Prefix 

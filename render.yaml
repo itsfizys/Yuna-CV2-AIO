@@ -1,0 +1,60 @@
+# Render Blueprint for LightCore (Discord bot)
+#
+# WHY THE OLD DEPLOY FAILED
+#   "bash: line 1: gunicorn: command not found" + "Running 'gunicorn
+#   your_application.wsgi'" means Render was running this as a *web service*,
+#   using the default start command. A Discord bot is not a WSGI/ASGI app: it
+#   connects outbound to Discord's gateway and never listens on a port. There is
+#   no gunicorn in requirements.txt, so the command cannot exist.
+#
+# TWO WAYS TO RUN IT HERE
+#   1. type: worker  (paid instances) - no port needed, this is the clean setup.
+#   2. type: web     (works on the free tier) - LightCore detects $PORT and
+#                    serves /health on it while the bot runs.
+#
+# Pick one: keep ONE of the two services below and delete the other.
+
+services:
+  # ---------------------------------------------------------------- #
+  #  Option A - worker (paid plan)
+  # ---------------------------------------------------------------- #
+  - type: worker
+    name: lightcore
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: python LightCore.py
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: BOT_PREFIX
+        value: "&"
+      - key: TOKEN
+        sync: false
+      - key: OWNER_IDS
+        sync: false
+      - key: WEBHOOK_URL
+        sync: false
+
+  # ---------------------------------------------------------------- #
+  #  Option B - web service (free tier friendly)
+  #  LightCore exposes $PORT for the host; delete Option A if you use this.
+  # ---------------------------------------------------------------- #
+  # - type: web
+  #   name: lightcore
+  #   runtime: python
+  #   plan: free
+  #   buildCommand: pip install -r requirements.txt
+  #   startCommand: python LightCore.py
+  #   healthCheckPath: /health
+  #   autoDeploy: true
+  #   envVars:
+  #     - key: PYTHON_VERSION
+  #       value: 3.11.9
+  #     - key: BOT_PREFIX
+  #       value: "&"
+  #     - key: TOKEN
+  #       sync: false
+  #     - key: OWNER_IDS
+  #       sync: false

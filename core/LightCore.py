@@ -46,7 +46,9 @@ class LightCore (commands .AutoShardedBot ):
         everyone =False ,replied_user =False ,roles =False ),
         sync_commands_debug =True ,
         sync_commands =True ,
-        shard_count =2 )
+        # Shard count is left to discord.py: 2 forced shards breaks self-hosting
+        # for small bots, and Discord rejects more shards than ceil(guilds/1000).
+        )
 
 
         self .add_check (self.global_adminlock_check)
