@@ -1,7 +1,7 @@
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
 import discord 
@@ -11,7 +11,7 @@ import aiosqlite
 import os 
 from utils .Tools import *
 from typing import Union 
-from utils .paginator import Paginator as aegis 
+from utils .paginator import Paginator as lightcore 
 
 
 class BlacklistWordSource (menus .ListPageSource ):
@@ -201,7 +201,7 @@ class Blacklist (commands .Cog ):
         "➜ `blacklistword bypass list` - Show the list of bypassed roles/users."
         ]
 
-        paginator =aegis (
+        paginator =lightcore (
         source =BlacklistWordSource (commands_list ),
         ctx =ctx 
         )

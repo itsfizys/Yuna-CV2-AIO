@@ -1,7 +1,7 @@
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
 import discord 
@@ -52,7 +52,7 @@ class TopCheck (commands .Cog ):
         embed =discord .Embed (title ="Top Check System",
         description =(
         "This system ensures that the bot’s role is positioned higher than the user’s top role before executing specific commands.\n\n"
-        "When topcheck is enabled, only users with roles above the bot's (Yuna) role can perform certain moderation actions. "
+        "When topcheck is enabled, only users with roles above the bot's (LightCore) role can perform certain moderation actions. "
         "If topcheck is disabled, any user with the required permissions for a command can execute it.\n\n"
         "**Moderation actions affected by topcheck:**\n"
         "- BAN\n"
@@ -94,8 +94,8 @@ class TopCheck (commands .Cog ):
 
 
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """

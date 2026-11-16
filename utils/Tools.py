@@ -1,7 +1,7 @@
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
 import json ,sys ,os 
@@ -265,8 +265,8 @@ def mark_error_handled (ctx ):
     command_key =(ctx .message .id ,ctx .command .name )
     _handled_errors .add (command_key )
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """

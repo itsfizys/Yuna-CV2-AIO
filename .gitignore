@@ -1,0 +1,17 @@
+# Secrets
+.env
+config.yml
+
+# Runtime artefacts
+logs/
+*.log
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local databases (recreated by init_db.py / on first run)
+db/*.db
+
+# Local emoji upload staging
+assets/emojis/

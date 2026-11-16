@@ -1,0 +1,45 @@
+# Render Blueprint for LightCore — WEB SERVICE (free tier friendly)
+#
+# The previous deploy failed with:
+#   ==> Running 'gunicorn your_application.wsgi'
+#   bash: line 1: gunicorn: command not found   (exit 127)
+#
+# Reason: Render ran this as a web service with its default start command.
+# A Discord bot is not a WSGI/ASGI app - it opens an outbound gateway
+# connection and never listens on a port, so gunicorn can never work here.
+#
+# This blueprint uses a WEB SERVICE with an explicit start command
+# (`python LightCore.py`) plus a real HTTP listener: LightCore binds $PORT and
+# serves / and /health while the bot runs in the same process (utils/health.py),
+# so Render's port scan and health check pass.
+
+services:
+  - type: web
+    name: lightcore
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python LightCore.py
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: BOT_PREFIX
+        value: "&"
+      # sync:false -> Render asks you for these instead of storing them in git
+      - key: TOKEN
+        sync: false
+      - key: OWNER_IDS
+        sync: false
+      - key: WEBHOOK_URL
+        sync: false
+
+# ---------------------------------------------------------------------------
+# Notes
+#  * Free web services without traffic get suspended and stop receiving events.
+#    If commands go silent after ~15 min, upgrade the plan or add a cron job
+#    that pings https://<your-service>.onrender.com/health every 10 minutes.
+#  * To run as a Background Worker instead (no port, paid instances) change
+#    `type: web` -> `type: worker`, drop `healthCheckPath` and `plan: free`.
+# ---------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-git+https://github.com/Rapptz/discord.py.git
+discord.py>=2.4.0
 jishaku
 discord-ext-menus
 psutil==5.9.8
@@ -9,7 +9,7 @@ langdetect
 python-dotenv
 PyYAML
 openai
-duckduckgo-search==6.3.6
+duckduckgo-search>=6.3.6
 pillow>=10.2.0
 colorama
 chess

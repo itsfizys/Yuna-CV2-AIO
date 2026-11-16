@@ -1,7 +1,7 @@
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
 import discord 
@@ -53,7 +53,7 @@ class Customrole (commands .Cog ):
     async def add_role (self ,*,role_id :int ,member :discord .Member ):
         if member .guild .me .guild_permissions .manage_roles :
             role =discord .Object (id =role_id )
-            await member .add_roles (role ,reason ="Yuna Customrole | Role Added")
+            await member .add_roles (role ,reason ="LightCore Customrole | Role Added")
         else :
             raise discord .Forbidden ("Bot does not have permission to manage roles.")
 
@@ -62,7 +62,7 @@ class Customrole (commands .Cog ):
     async def remove_role (self ,*,role_id :int ,member :discord .Member ):
         if member .guild .me .guild_permissions .manage_roles :
             role =discord .Object (id =role_id )
-            await member .remove_roles (role ,reason ="Yuna Customrole | Role Removed")
+            await member .remove_roles (role ,reason ="LightCore Customrole | Role Removed")
         else :
             raise discord .Forbidden ("Bot does not have permission to manage roles.")
 
@@ -71,12 +71,12 @@ class Customrole (commands .Cog ):
     async def add_role2 (self ,*,role :int ,member :discord .Member ):
         if member .guild .me .guild_permissions .manage_roles :
             role =discord .Object (id =int (role ))
-            await member .add_roles (role ,reason ="Yuna Customrole | Role Added ")
+            await member .add_roles (role ,reason ="LightCore Customrole | Role Added ")
 
     async def remove_role2 (self ,*,role :int ,member :discord .Member ):
         if member .guild .me .guild_permissions .manage_roles :
             role =discord .Object (id =int (role ))
-            await member .remove_roles (role ,reason ="Yuna Customrole| Role Removed")
+            await member .remove_roles (role ,reason ="LightCore Customrole| Role Removed")
 
 
 
@@ -428,7 +428,7 @@ class Customrole (commands .Cog ):
                 async with aiosqlite .connect (DATABASE_PATH )as db :
                     await db .execute ("DELETE FROM custom_roles WHERE guild_id = ?",(context .guild .id ,))
                     await db .commit ()
-                    description_text = f"Deleted All Custom Role commands <:Yuna_tick:1227866641027698792>\n\n**Removed Roles:**\n" + "\n".join(removed_roles) if removed_roles else "No roles were previously set."
+                    description_text = f"Deleted All Custom Role commands <:LightCore_tick:1227866641027698792>\n\n**Removed Roles:**\n" + "\n".join(removed_roles) if removed_roles else "No roles were previously set."
                     await self.send_message(context, title="Custom Role Configuration Reset", description=description_text)
             else :
                 await self.send_message(context, description="No configuration found for this server.")

@@ -1,17 +1,17 @@
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
 import discord 
-from core import Yuna ,Cog 
+from core import LightCore ,Cog 
 from discord .ext import commands 
 import aiosqlite 
 from datetime import datetime ,timedelta 
 
 class AutoBlacklist (Cog ):
-    def __init__ (self ,client :Yuna ):
+    def __init__ (self ,client :LightCore ):
         self .client =client 
         self .spam_cd_mapping =commands .CooldownMapping .from_cooldown (5 ,5 ,commands .BucketType .member )
         self .spam_command_mapping =commands .CooldownMapping .from_cooldown (6 ,10 ,commands .BucketType .member )
@@ -58,7 +58,7 @@ class AutoBlacklist (Cog ):
                         title ="<:icon_danger:1373170993236803688> Guild Blacklisted",
                         description =(
                         f"This guild has been blacklisted due to spamming or automation. "
-                        f"If you believe this is a mistake, please contact our [Support Server](https://discord.gg/JxCFmz9nZP) with any proof if possible."
+                        f"If you believe this is a mistake, please contact our [Support Server](https://discord.gg/8qe98sAGs9) with any proof if possible."
                         ),
                         color =0x000000 
                         )
@@ -137,7 +137,7 @@ class AutoBlacklist (Cog ):
                     await self .add_to_blacklist (user_id =message .author .id )
                     embed =discord .Embed (
                     title ="<:icon_danger:1373170993236803688> User Blacklisted",
-                    description =f"**{message.author.mention} has been blacklisted for repeatedly mentioning me. If you believe this is a mistake, please contact our [Support Server](https://discord.gg/JxCFmz9nZP) with any proof if possible.**",
+                    description =f"**{message.author.mention} has been blacklisted for repeatedly mentioning me. If you believe this is a mistake, please contact our [Support Server](https://discord.gg/8qe98sAGs9) with any proof if possible.**",
                     color =0x000000 
                     )
                     await message .channel .send (embed =embed )
@@ -169,14 +169,14 @@ class AutoBlacklist (Cog ):
                 await self .add_to_blacklist (user_id =ctx .author .id )
                 embed =discord .Embed (
                 title ="<:icon_danger:1373170993236803688> User Blacklisted",
-                description =f"**{ctx.author.mention} has been blacklisted for spamming commands. If you believe this is a mistake, please contact our [Support Server](https://discord.gg/JxCFmz9nZP) with any proof if possible.**",
+                description =f"**{ctx.author.mention} has been blacklisted for spamming commands. If you believe this is a mistake, please contact our [Support Server](https://discord.gg/8qe98sAGs9) with any proof if possible.**",
                 color =0x000000 
                 )
                 await ctx .reply (embed =embed )
 
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """

@@ -1,7 +1,7 @@
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
 import discord 
@@ -409,7 +409,7 @@ class Message (commands .Cog ):
   async def clear (self ,ctx ,choice :Union [discord .Member ,int ]=None ,amount :int =None ):
         if choice is None:
             loading_container = ui.Container(
-                ui.TextDisplay("<a:Yuna_loading:1373173756113195081> Loading purge interface..."),
+                ui.TextDisplay("<a:LightCore_loading:1373173756113195081> Loading purge interface..."),
                 accent_color=None
             )
             loading_view = ui.LayoutView()
@@ -600,8 +600,8 @@ class Message (commands .Cog ):
 
 
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """

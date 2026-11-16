@@ -1,7 +1,7 @@
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
 from __future__ import annotations 
@@ -18,7 +18,7 @@ from typing import Optional
 from utils import Paginator ,DescriptionEmbedPaginator ,FieldPagePaginator ,TextPaginator 
 from utils .Tools import *
 from utils .config import OWNER_IDS 
-from core import Cog ,Yuna ,Context 
+from core import Cog ,LightCore ,Context 
 import sqlite3 
 import os 
 import requests 
@@ -192,29 +192,29 @@ class Owner (commands .Cog ):
     @commands .is_owner ()
     async def staff_add (self ,ctx ,user :discord .User ):
         if user .id in self .staff :
-            aegis =discord .Embed (title ="<:icon_danger:1373170993236803688> Access Denied",description =f"{user} is already in the staff list.",color =0x000000 )
-            await ctx .reply (embed =aegis ,mention_author =False )
+            lightcore =discord .Embed (title ="<:icon_danger:1373170993236803688> Access Denied",description =f"{user} is already in the staff list.",color =0x000000 )
+            await ctx .reply (embed =lightcore ,mention_author =False )
         else :
             self .staff .add (user .id )
             async with aiosqlite .connect (self .db_path )as db :
                 await db .execute ('INSERT OR IGNORE INTO staff (id) VALUES (?)',(user .id ,))
                 await db .commit ()
-            aegis2 =discord .Embed (title ="<:icon_tick:1372375089668161597>Success",description =f"Added {user} to the staff list.",color =0x000000 )
-            await ctx .reply (embed =aegis2 ,mention_author =False )
+            lightcore2 =discord .Embed (title ="<:icon_tick:1372375089668161597>Success",description =f"Added {user} to the staff list.",color =0x000000 )
+            await ctx .reply (embed =lightcore2 ,mention_author =False )
 
     @commands .command (name ="staff_remove",aliases =["staffremove","removestaff"],help ="Removes a user from the staff list.")
     @commands .is_owner ()
     async def staff_remove (self ,ctx ,user :discord .User ):
         if user .id not in self .staff :
-            aegis =discord .Embed (title ="<:icon_danger:1373170993236803688> Access Denied",description =f"{user} is not in the staff list.",color =0x000000 )
-            await ctx .reply (embed =aegis ,mention_author =False )
+            lightcore =discord .Embed (title ="<:icon_danger:1373170993236803688> Access Denied",description =f"{user} is not in the staff list.",color =0x000000 )
+            await ctx .reply (embed =lightcore ,mention_author =False )
         else :
             self .staff .remove (user .id )
             async with aiosqlite .connect (self .db_path )as db :
                 await db .execute ('DELETE FROM staff WHERE id = ?',(user .id ,))
                 await db .commit ()
-                aegis2 =discord .Embed (title ="<:icon_tick:1372375089668161597>Success",description =f"Removed {user} from the staff list.",color =0x000000 )
-            await ctx .reply (embed =aegis2 ,mention_author =False )
+                lightcore2 =discord .Embed (title ="<:icon_tick:1372375089668161597>Success",description =f"Removed {user} from the staff list.",color =0x000000 )
+            await ctx .reply (embed =lightcore2 ,mention_author =False )
 
     @commands .command (name ="staff_list",aliases =["stafflist","liststaff","staffs"],help ="Lists all staff members.")
     @commands .is_owner ()
@@ -227,8 +227,8 @@ class Owner (commands .Cog ):
                 member =await self .client .fetch_user (staff_id )
                 member_list .append (f"{member.name}#{member.discriminator} (ID: {staff_id})")
             staff_display ="\n".join (member_list )
-            aegis =discord .Embed (title ="<:icon_tick:1372375089668161597>Quantum Staffs",description =f"\n{staff_display}",color =0x000000 )
-            await ctx .send (embed =aegis )
+            lightcore =discord .Embed (title ="<:icon_tick:1372375089668161597>Quantum Staffs",description =f"\n{staff_display}",color =0x000000 )
+            await ctx .send (embed =lightcore )
 
     @commands .command (name ="slist")
     @commands .check (is_owner_or_staff )
@@ -241,7 +241,7 @@ class Owner (commands .Cog ):
         paginator =Paginator (source =DescriptionEmbedPaginator (
         entries =entries ,
         description ="",
-        title =f"Guild List of Yuna-bot [{len(self.client.guilds)}]",
+        title =f"Guild List of LightCore [{len(self.client.guilds)}]",
         color =0x000000 ,
         per_page =10 ),
         ctx =ctx )
@@ -304,7 +304,7 @@ class Owner (commands .Cog ):
     @commands .command (name ="S.reboot",help ="Restarts the client.")
     @commands .is_owner ()
     async def _restart (self ,ctx :Context ):
-        await ctx .reply ("Rebooting Yuna...")
+        await ctx .reply ("Rebooting LightCore...")
         restart_program ()
 
     @commands .command (name ="sync",help ="Syncs all database.")
@@ -340,13 +340,13 @@ class Owner (commands .Cog ):
 
 
         embed =discord .Embed (
-        title ="🌸 Yuna Update Time 🌸",
+        title ="🌸 LightCore Update Time 🌸",
         description =message ,
         color =0x00d4ff ,
         timestamp =discord .utils .utcnow ()
         )
         embed .set_author (
-        name ="AeroX Development Team",
+        name ="LightCore Development Team",
         icon_url =self .client .user .avatar .url if self .client .user .avatar else self .client .user .default_avatar .url 
         )
         embed .set_footer (
@@ -435,7 +435,7 @@ class Owner (commands .Cog ):
         ]
         paginator =Paginator (source =DescriptionEmbedPaginator (
         entries =entries ,
-        title =f"Yuna Owners [{len(nplist)}]",
+        title =f"LightCore Owners [{len(nplist)}]",
         description ="",
         per_page =10 ,
         color =0x000000 ),
@@ -885,7 +885,7 @@ class Badges (commands .Cog ):
     @commands .cooldown (1 ,3 ,commands .BucketType .user )
     async def badges (self ,ctx ,member :discord .Member =None ):
 
-        processing_message =await ctx .send ("<a:Yuna_loading:1372527554761855038> Loading your profile...")
+        processing_message =await ctx .send ("<a:LightCore_loading:1372527554761855038> Loading your profile...")
 
         member =member or ctx .author 
         user_id =member .id 
@@ -1090,8 +1090,8 @@ class Badges (commands .Cog ):
 
 
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """

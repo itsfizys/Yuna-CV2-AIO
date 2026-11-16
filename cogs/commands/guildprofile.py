@@ -1,21 +1,21 @@
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
 from __future__ import annotations
 from discord.ext import commands
 from discord import ui
 import discord
-from core import Cog, Yuna, Context
+from core import Cog, LightCore, Context
 from utils.Tools import *
 
 
 class GuildProfile(Cog):
     """Commands to customize the bot's guild-specific profile"""
     
-    def __init__(self, bot: Yuna):
+    def __init__(self, bot: LightCore):
         self.bot = bot
 
     @commands.command(

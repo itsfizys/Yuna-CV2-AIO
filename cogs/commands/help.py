@@ -1,7 +1,7 @@
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
 import discord 
@@ -10,7 +10,7 @@ from discord import app_commands ,Interaction
 from difflib import get_close_matches 
 from contextlib import suppress 
 from core import Context 
-from core .Yuna import Yuna 
+from core .LightCore import LightCore 
 from core .Cog import Cog 
 from utils .Tools import getConfig 
 from itertools import chain 
@@ -23,7 +23,7 @@ from discord import ui
 from utils.logger import logger
 
 color =0x000000 
-client =Yuna ()
+client =LightCore ()
 
 class HelpLayout(ui.LayoutView):
     def __init__(self, help_cog, ctx, server_prefix=None):
@@ -35,7 +35,7 @@ class HelpLayout(ui.LayoutView):
 
         self.total_commands = len(set(self.ctx.bot.walk_commands()))
 
-        self.filtered_mapping = self.create_Yuna_mapping()
+        self.filtered_mapping = self.create_LightCore_mapping()
 
         self.container = ui.Container(accent_color=None)
 
@@ -44,8 +44,8 @@ class HelpLayout(ui.LayoutView):
 
         self.add_item(self.container)
 
-    def create_Yuna_mapping(self):
-        """Create a filtered mapping that only includes cogs from cogs/Yuna directories"""
+    def create_LightCore_mapping(self):
+        """Create a filtered mapping that only includes cogs from cogs/LightCore directories"""
         main_menu_classes = {
             '_general', '_voice', '_welcome', 'ticket', '__sticky'
         }
@@ -57,15 +57,15 @@ class HelpLayout(ui.LayoutView):
         }
 
         all_allowed_classes = main_menu_classes | extra_menu_classes
-        Yuna_mapping = {}
+        LightCore_mapping = {}
 
         for cog in self.ctx.bot.cogs.values():
             if cog and hasattr(cog, '__class__'):
                 cog_class_name = cog.__class__.__name__
                 if cog_class_name in all_allowed_classes and hasattr(cog, 'help_custom'):
-                    Yuna_mapping[cog] = cog.get_commands()
+                    LightCore_mapping[cog] = cog.get_commands()
 
-        return Yuna_mapping
+        return LightCore_mapping
 
     def create_select_options(self, menu_type):
         """No select options - empty"""
@@ -96,7 +96,7 @@ class HelpLayout(ui.LayoutView):
 
         new_content = (
             f"<a:ButterflyWhite:1479361913812025386> Hey [{self.ctx.author.display_name}]({self.ctx.author.avatar.url if self.ctx.author.avatar else 'https://discord.com'})!\n"
-            f"I'm **Yuna**, your friendly companion.\n\n"
+            f"I'm **LightCore**, your friendly companion.\n\n"
             f"   <:arrow:1479361920254345391> Prefix for this server: **{self.server_prefix}**\n"
             f"   <:arrow:1479361920254345391> Pick from the menu to continue!"
         )
@@ -1204,9 +1204,9 @@ class HelpCommand (commands .HelpCommand ):
   def command_not_found (self ,string :str )->str :
     return f"No command called `{string}` found."
 
-  def create_Yuna_mapping (self ,mapping ):
-    """Create a filtered mapping that only includes cogs from cogs/Yuna directories"""
-    Yuna_mapping ={}
+  def create_LightCore_mapping (self ,mapping ):
+    """Create a filtered mapping that only includes cogs from cogs/LightCore directories"""
+    LightCore_mapping ={}
 
 
     allowed_cog_classes ={
@@ -1223,9 +1223,9 @@ class HelpCommand (commands .HelpCommand ):
         cog_class_name =cog .__class__ .__name__ 
 
         if cog_class_name in allowed_cog_classes and hasattr (cog ,'help_custom'):
-          Yuna_mapping [cog ]=commands 
+          LightCore_mapping [cog ]=commands 
 
-    return Yuna_mapping 
+    return LightCore_mapping 
 
   async def send_bot_help (self ,mapping ):
     ctx =self .context 
@@ -1437,7 +1437,7 @@ class HelpCommand (commands .HelpCommand ):
 
 class Help (Cog ,name ="help"):
 
-  def __init__ (self ,client :Yuna ):
+  def __init__ (self ,client :LightCore ):
     self .bot =client 
     self ._original_help_command =client .help_command 
     attributes ={
@@ -1454,14 +1454,14 @@ class Help (Cog ,name ="help"):
 
 
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """

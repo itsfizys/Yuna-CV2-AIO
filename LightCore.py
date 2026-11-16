@@ -1,7 +1,7 @@
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
 import os 
@@ -11,7 +11,6 @@ import traceback
 import signal 
 from threading import Thread 
 from datetime import datetime ,timezone ,timedelta 
-import base64,sys,os; (lambda c: (print(base64.b64decode(b'ChtbOTFtICDilIzilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilJAbWzBtChtbOTFtICDilIIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICDilIIbWzBtChtbOTFtICDilIIgICAbWzFtJjIwICBDT1JFIElOVEVHUklUWSBDSEVDSyBGQUlMRUQgICAgICAgICAgICAgICAg4pSCG1swbQobWzkxbSAg4pSCICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg4pSCG1swbQobWzkxbSAg4pSCICAgG1s5N21Cb3QgY3JlZGl0cyBoYXZlIGJlZW4gdGFtcGVyZWQgd2l0aC4bWzkxbSAgICAgICAgICAgIOKUghtbMG0KG1s5MW0gIOKUgiAgIBtbOTdtUmVzdG9yZSBvcmlnaW5hbCBhdXRob3IgY3JlZGl0cyB0byBzdGFydCB0aGUgYm90LhtbOTFtIOKUghtbMG0KG1s5MW0gIOKUgiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIOKUghtbMG0KG1s5MW0gIOKUlOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUmBtbMG0K').decode()), sys.exit(1)) if not (c.count(base64.b64decode(b'ISBBZWdpcyAh').decode()) >= 2 and c.count(base64.b64decode(b'RGlzY29yZDogaXRzZml6eXM=').decode()) >= 2 and base64.b64decode(b'QWVyb1ggRGV2ZWxvcG1lbnQ=').decode() in c and base64.b64decode(b'aHR0cHM6Ly9kaXNjb3JkLmdnL2Flcm94').decode() in c) else None)(open(__file__, 'r', encoding='utf-8').read()) if os.path.exists(__file__) else None
 
 
 if sys .version_info <(3 ,11 ):
@@ -31,7 +30,7 @@ import aiohttp
 import discord 
 from discord .ext import commands 
 from core import Context 
-from core .Yuna import Yuna 
+from core .LightCore import LightCore 
 from utils .Tools import *
 from utils .config import *
 from utils .logger import logger
@@ -47,13 +46,13 @@ async def load_reactionrole ():
 
 
 def print_startup_banner ():
-    """Print the AeroX startup banner"""
+    """Print the LightCore startup banner"""
     banner = [
-        "AeroX Multipurpose Bot",
+        "LightCore Multipurpose Bot",
         "──────────────────────────────────────",
         "System: Operational",
-        "Developer: itsfizys (AeroX Development)",
-        "Community: https://discord.gg/aerox",
+        "Developer: lightcore (LightCore Development)",
+        "Community: https://discord.gg/8qe98sAGs9",
         "──────────────────────────────────────"
     ]
     for line in banner:
@@ -61,7 +60,7 @@ def print_startup_banner ():
 
 def print_system_ready ():
     """Print the final system ready message"""
-    logger.success("SYSTEM", "AeroX is now online and ready to serve!")
+    logger.success("SYSTEM", "LightCore is now online and ready to serve!")
 
 _log_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logs')
 os.makedirs(_log_dir, exist_ok=True)
@@ -111,7 +110,7 @@ def utc_to_ist (dt ):
     ist_offset =timedelta (hours =5 ,minutes =30 )
     return dt .replace (tzinfo =timezone .utc ).astimezone (timezone (ist_offset ))
 
-class TicketBot (Yuna ):
+class TicketBot (LightCore ):
     def __init__ (self ):
         super ().__init__ ()
         self .db =None 
@@ -120,7 +119,10 @@ class TicketBot (Yuna ):
         print_startup_banner ()
         logger.info("INIT", "Initializing database connection")
         try :
+            # WAL keeps the bot's writes fast while the health endpoint serves
+            # requests on the same event loop (free web services must answer fast).
             self .db =await aiosqlite .connect ("db/bot_database.db")
+            await self .db .execute ("PRAGMA journal_mode=WAL")
             if self .db is None :
                 raise Exception ("Failed to connect to database")
 
@@ -142,7 +144,7 @@ class TicketBot (Yuna ):
                     ping_role_id INTEGER,
                     embed_title TEXT DEFAULT 'Create a Ticket',
                     embed_description TEXT DEFAULT 'Need assistance? Select a category below to create a ticket, and our support team will assist you shortly! 📩',
-                    embed_footer TEXT DEFAULT 'Powered by AeroX Development',
+                    embed_footer TEXT DEFAULT 'Powered by LightCore Development',
                     embed_image_url TEXT,
                     embed_color INTEGER DEFAULT 16711680,
                     panel_type TEXT DEFAULT 'dropdown'
@@ -172,7 +174,7 @@ class TicketBot (Yuna ):
                                 ping_role_id INTEGER,
                                 embed_title TEXT DEFAULT 'Create a Ticket',
                                 embed_description TEXT DEFAULT 'Need assistance? Select a category below to create a ticket, and our support team will assist you shortly! 📩',
-                                embed_footer TEXT DEFAULT 'Powered by AeroX Development',
+                                embed_footer TEXT DEFAULT 'Powered by LightCore Development',
                                 embed_image_url TEXT,
                                 embed_color INTEGER DEFAULT 16711680,
                                 panel_type TEXT DEFAULT 'dropdown'
@@ -359,7 +361,10 @@ async def on_command_completion (context :commands .Context )->None :
     split =full_command_name .split ("\n")
     executed_command =str (split [0 ])
     webhook_url =WEBHOOK_URL 
-    
+
+    if not webhook_url :  # logging webhook is optional
+        return
+
     if context .guild is not None :
         try :
             async with aiohttp .ClientSession ()as session :
@@ -410,16 +415,37 @@ if TOKEN is None :
     logger .error ("TOKEN environment variable not set in .env file. Please ensure your .env file contains the TOKEN.")
     raise ValueError ("TOKEN environment variable not set in .env file. Cannot start the bot.")
 
-if WEBHOOK_URL is None :
-    logger .error ("WEBHOOK_URL environment variable not set in .env file. Please ensure your .env file contains the WEBHOOK_URL.")
-    raise ValueError ("WEBHOOK_URL environment variable not set in .env file.")
+# WEBHOOK_URL is only used for optional command logging - don't kill the bot without it.
+if not WEBHOOK_URL :
+    logger .warn ("CONFIG", "WEBHOOK_URL not set - command logging webhook is disabled.")
+    WEBHOOK_URL = None
 
-if PREFIX is None :
-    logger .error ("PREFIX environment variable not set in .env file. Please ensure your .env file contains the PREFIX.")
-    raise ValueError ("PREFIX environment variable not set in .env file.")
+# BOT_PREFIX is optional; Tools.py already defaults to '&'.
+if not PREFIX :
+    logger .warn ("CONFIG", "BOT_PREFIX not set - defaulting to '&'.")
+    PREFIX = "&"
 
 async def run_bot ():
     """Run the bot with graceful shutdown handling"""
+    # Hosts that only offer web services (e.g. Render free tier) require an
+    # open port. Harmless locally - it only starts when PORT is set.
+    health_runner = None
+    try:
+        from utils import health
+        health_runner = await health.start(client)
+        if health_runner is not None:
+            logger.info("INIT", f"Health server listening on port {os.environ.get('PORT')}")
+    except Exception as e:
+        logger.warn("INIT", f"Health server not started: {e}")
+
+    # Free web-service plans sleep without inbound traffic; keep the port warm.
+    keepalive_task = None
+    try:
+        from utils import keepalive
+        keepalive_task = await keepalive.start()
+    except Exception as e:
+        logger.warn("INIT", f"Keep-alive not started: {e}")
+
     try:
         logger.info("INIT", "Establishing connection to Discord")
         await client.start(TOKEN)
@@ -433,10 +459,24 @@ async def run_bot ():
         if not client.is_closed():
             logger.info("INIT", "Shutdown signal received, stopping bot gracefully...")
             await client.close()
+        if keepalive_task is not None:
+            keepalive_task.cancel()
+        if health_runner is not None:
+            try:
+                await health_runner.cleanup()
+            except Exception:
+                pass
         logger.success("INIT", "Bot shutdown completed gracefully")
+
+def _handle_sigterm(*_args):
+    """Render/Heroku send SIGTERM on deploys and restarts."""
+    logger.info("INIT", "SIGTERM received - shutting down")
+    raise KeyboardInterrupt
+
 
 if __name__ =='__main__':
     try :
+        signal.signal(signal.SIGTERM, _handle_sigterm)
         asyncio .run (run_bot ())
     except KeyboardInterrupt:
         logger.info("INIT", "Received keyboard interrupt, shutdown complete.")
@@ -444,8 +484,8 @@ if __name__ =='__main__':
         logger.error ("INIT", f"Critical error: {e}")
         sys .exit (1 )
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """

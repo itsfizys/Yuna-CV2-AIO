@@ -1,7 +1,7 @@
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
 import discord 
@@ -225,7 +225,7 @@ class AdvancedTicketSystem (commands .Cog ):
                                 ping_role_id INTEGER,
                                 embed_title TEXT DEFAULT '🎫 Create a Support Ticket',
                                 embed_description TEXT DEFAULT 'Need help? Click the button below to create a ticket and our support team will assist you!',
-                                embed_footer TEXT DEFAULT 'Powered by AeroX Development',
+                                embed_footer TEXT DEFAULT 'Powered by LightCore Development',
                                 embed_color INTEGER DEFAULT 0,
                                 embed_image TEXT,
                                 embed_thumbnail TEXT
@@ -271,7 +271,7 @@ class AdvancedTicketSystem (commands .Cog ):
                             ping_role_id INTEGER,
                             embed_title TEXT DEFAULT '🎫 Create a Support Ticket',
                             embed_description TEXT DEFAULT 'Need help? Click the button below to create a ticket and our support team will assist you!',
-                            embed_footer TEXT DEFAULT 'Powered by AeroX Development',
+                            embed_footer TEXT DEFAULT 'Powered by LightCore Development',
                             embed_color INTEGER DEFAULT 0,
                             embed_image TEXT,
                             embed_thumbnail TEXT
@@ -483,8 +483,8 @@ class AdvancedTicketSystem (commands .Cog ):
     def create_branded_embed (self ,title :str ,description :str =None ,color :int =0x000000 )->discord .Embed :
         """Create a consistently branded embed"""
         embed =discord .Embed (title =title ,description =description ,color =color )
-        embed .set_author (name ="Yuna Ticket System",icon_url =self .bot .user .avatar .url if self .bot .user .avatar else None )
-        embed .set_footer (text ="Developed By AeroX Development",icon_url =self .bot .user .avatar .url if self .bot .user .avatar else None )
+        embed .set_author (name ="LightCore Ticket System",icon_url =self .bot .user .avatar .url if self .bot .user .avatar else None )
+        embed .set_footer (text ="Developed By LightCore Development",icon_url =self .bot .user .avatar .url if self .bot .user .avatar else None )
         embed .timestamp =datetime .datetime .utcnow ()
         return embed 
 
@@ -533,7 +533,7 @@ class AdvancedTicketSystem (commands .Cog ):
                 )
                 embed .set_thumbnail (url =creator .display_avatar .url )
                 embed .set_footer (
-                text ="Thanks for using Yuna ❤️",
+                text ="Thanks for using LightCore ❤️",
                 icon_url =self .bot .user .avatar .url if self .bot .user .avatar else None 
                 )
                 embed .timestamp =datetime .datetime .utcnow ()
@@ -567,7 +567,7 @@ class AdvancedTicketSystem (commands .Cog ):
 
                 embed .set_thumbnail (url =claimer .display_avatar .url )
                 embed .set_footer (
-                text ="Thanks for using Yuna ❤️",
+                text ="Thanks for using LightCore ❤️",
                 icon_url =self .bot .user .avatar .url if self .bot .user .avatar else None 
                 )
                 embed .timestamp =datetime .datetime .utcnow ()
@@ -599,7 +599,7 @@ class AdvancedTicketSystem (commands .Cog ):
                 )
                 embed .set_thumbnail (url =self .bot .user .avatar .url if self .bot .user .avatar else None )
                 embed .set_footer (
-                text ="Thanks for using Yuna ❤️",
+                text ="Thanks for using LightCore ❤️",
                 icon_url =self .bot .user .avatar .url if self .bot .user .avatar else None 
                 )
                 embed .timestamp =datetime .datetime .utcnow ()
@@ -663,7 +663,7 @@ class AdvancedTicketSystem (commands .Cog ):
                     )
 
                 embed .set_footer (
-                text ="Thanks for using Yuna ❤️",
+                text ="Thanks for using LightCore ❤️",
                 icon_url =self .bot .user .avatar .url if self .bot .user .avatar else None 
                 )
                 embed .timestamp =datetime .datetime .utcnow ()
@@ -1313,7 +1313,7 @@ class AdvancedTicketSystem (commands .Cog ):
             if guild and guild .icon :
                 embed .set_thumbnail (url =guild .icon .url )
 
-            embed .set_footer (text ="Thanks for using Yuna ❤️")
+            embed .set_footer (text ="Thanks for using LightCore ❤️")
 
 
             view =RatingSelectView (ticket_info ,transcript )
@@ -1528,7 +1528,7 @@ class AdvancedTicketSystem (commands .Cog ):
             )
 
             welcome_embed .set_footer (
-            text ="Developed By AeroX Development",
+            text ="Developed By LightCore Development",
             icon_url =self .bot .user .avatar .url if self .bot .user .avatar else None 
             )
             welcome_embed .timestamp =created_time 
@@ -1672,7 +1672,7 @@ class AdvancedTicketSystem (commands .Cog ):
             description =config [1 ]or "Need help? Click the button below to create a ticket and our support team will assist you!",
             color =config [3 ]or 0x000000 
             )
-            embed .set_footer (text =config [2 ]or "Developed By AeroX Development")
+            embed .set_footer (text =config [2 ]or "Developed By LightCore Development")
             embed .timestamp =datetime .datetime .utcnow ()
 
 
@@ -1844,7 +1844,7 @@ class TicketSetupView (discord .ui .View ):
                 log_channel .id if log_channel else None ,
                 "🎫 Create a Support Ticket",
                 "Need help? Click the button below to create a ticket and our support team will assist you!",
-                "Developed By AeroX Development",
+                "Developed By LightCore Development",
                 0x000000 ,
                 None ,
                 None 
@@ -2968,7 +2968,7 @@ class TicketAuthorInfoView (discord .ui .View ):
                 )
 
             embed .set_footer (
-            text ="Developed By AeroX Development",
+            text ="Developed By LightCore Development",
             icon_url =interaction .client .user .avatar .url if interaction .client .user .avatar else None 
             )
 
@@ -3024,8 +3024,8 @@ async def setup (bot ):
         import traceback 
         logger .error (f"Persistent view setup traceback: {traceback.format_exc()}")
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """

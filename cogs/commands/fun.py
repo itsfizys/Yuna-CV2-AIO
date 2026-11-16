@@ -1,7 +1,7 @@
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
 import discord 
@@ -13,7 +13,7 @@ import os
 from discord .ext import commands 
 from random import randint 
 from utils .Tools import *
-from core import Cog ,Yuna ,Context 
+from core import Cog ,LightCore ,Context 
 from utils .config import *
 from pathlib import Path 
 import json 
@@ -414,7 +414,7 @@ class Fun (commands .Cog ):
           f"Hosting: {hosting}"
           ))
           container.add_item(ui.Separator())
-          container.add_item(ui.TextDisplay(f'Made by AeroX Development - [{ctx.author.display_name}](https://discord.com/users/{ctx.author.id})'))
+          container.add_item(ui.TextDisplay(f'Made by LightCore Development - [{ctx.author.display_name}](https://discord.com/users/{ctx.author.id})'))
           view.add_item(container)
           await ctx.reply(view=view)
 
@@ -795,7 +795,7 @@ class Fun (commands .Cog ):
             container.add_item(ui.Separator())
             container.add_item(ui.TextDisplay(f"**🌐 Translated to {target_language}**\n{translation[:1024] + ('...' if len(translation) > 1024 else '')}"))
             container.add_item(ui.Separator())
-            container.add_item(ui.TextDisplay(f'Powered by AeroX Development • Requested by [{ctx.author.display_name}](https://discord.com/users/{ctx.author.id})'))
+            container.add_item(ui.TextDisplay(f'Powered by LightCore Development • Requested by [{ctx.author.display_name}](https://discord.com/users/{ctx.author.id})'))
             view.add_item(container)
 
             await ctx.reply(view=view)
@@ -811,8 +811,8 @@ class Fun (commands .Cog ):
 
 
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """

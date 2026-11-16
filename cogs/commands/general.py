@@ -1,7 +1,7 @@
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
 import asyncio
@@ -449,7 +449,7 @@ class General(commands.Cog):
     async def hack (self ,ctx : commands .Context ,member : discord .Member ):
         loading_view = discord.ui.LayoutView()
         loading_container = discord.ui.Container(
-            discord.ui.TextDisplay(f"🔓 **Hacking in progress...**\n\nTarget: {member.mention}\n\n<a:Yuna_loading:1373173756113195081> Processing hack attempt..."),
+            discord.ui.TextDisplay(f"🔓 **Hacking in progress...**\n\nTarget: {member.mention}\n\n<a:LightCore_loading:1373173756113195081> Processing hack attempt..."),
             accent_color=None
         )
         loading_view.add_item(loading_container)
@@ -526,7 +526,7 @@ class General(commands.Cog):
         view.add_item(container)
         await ctx .send (view=view)
 
-    @commands .command (name ="users",help ="checks total users of Yuna-bot.")
+    @commands .command (name ="users",help ="checks total users of LightCore.")
     @blacklist_check ()
     @ignore_check ()
     @commands .cooldown (1 ,3 ,commands .BucketType .user )
@@ -566,7 +566,7 @@ class General(commands.Cog):
     async def wizz (self ,ctx : commands .Context ):
         loading_view = discord.ui.LayoutView()
         loading_container = discord.ui.Container(
-            discord.ui.TextDisplay(f"⚡ **Wizzing {ctx.guild.name}**\n\n<a:Yuna_loading:1373173756113195081> Will take 22 seconds to complete..."),
+            discord.ui.TextDisplay(f"⚡ **Wizzing {ctx.guild.name}**\n\n<a:LightCore_loading:1373173756113195081> Will take 22 seconds to complete..."),
             accent_color=None
         )
         loading_view.add_item(loading_container)
@@ -585,7 +585,7 @@ class General(commands.Cog):
         for step in steps:
             await asyncio.sleep(1)
             step_container = discord.ui.Container(
-                discord.ui.TextDisplay(f"⚡ **Wizzing {ctx.guild.name}**\n\n<a:Yuna_loading:1373173756113195081> {step}"),
+                discord.ui.TextDisplay(f"⚡ **Wizzing {ctx.guild.name}**\n\n<a:LightCore_loading:1373173756113195081> {step}"),
                 accent_color=None
             )
             step_view = discord.ui.LayoutView()
@@ -640,7 +640,7 @@ class General(commands.Cog):
 
         loading_view = discord.ui.LayoutView()
         loading_container = discord.ui.Container(
-            discord.ui.TextDisplay(f"🔍 **Rickroll Detection**\n\nAnalyzing URL...\n\n<a:Yuna_loading:1373173756113195081> Checking for rickroll patterns..."),
+            discord.ui.TextDisplay(f"🔍 **Rickroll Detection**\n\nAnalyzing URL...\n\n<a:LightCore_loading:1373173756113195081> Checking for rickroll patterns..."),
             accent_color=None
         )
         loading_view.add_item(loading_container)
@@ -800,7 +800,7 @@ class General(commands.Cog):
 
         container.add_item(ui.Separator())
 
-        footer_info = f"Developed by **AeroX Development**"
+        footer_info = f"Developed by **LightCore Development**"
         container.add_item(ui.TextDisplay(footer_info))
 
         view.add_item(container)

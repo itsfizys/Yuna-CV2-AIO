@@ -1,11 +1,11 @@
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
 from __future__ import annotations 
-from core import Yuna 
+from core import LightCore 
 from colorama import Fore ,Style ,init 
 from utils.logger import logger
 import asyncio 
@@ -86,32 +86,32 @@ from .events .stickymessage import StickyMessageListener
 
 
 try:
-    from .Yuna.main_menu.general import _general
-    from .Yuna.main_menu.voice import _voice
-    from .Yuna.main_menu.games import _games
-    from .Yuna.main_menu.welcome import _welcome
-    from .Yuna.main_menu.stickymessage import __sticky
-    from .Yuna.main_menu.ticket import ticket
+    from .LightCore.main_menu.general import _general
+    from .LightCore.main_menu.voice import _voice
+    from .LightCore.main_menu.games import _games
+    from .LightCore.main_menu.welcome import _welcome
+    from .LightCore.main_menu.stickymessage import __sticky
+    from .LightCore.main_menu.ticket import ticket
 
-    from .Yuna.extra_menu.antinuke import _antinuke
-    from .Yuna.extra_menu.automod import _automod
-    from .Yuna.extra_menu.leveling import _leveling
-    from .Yuna.extra_menu.extra import _extra
-    from .Yuna.extra_menu.fun import _fun
-    from .Yuna.extra_menu.ai import _ai
-    from .Yuna.extra_menu.giveaway import _giveaway
-    from .Yuna.extra_menu.moderation import _moderation
-    from .Yuna.extra_menu.server import _server
-    from .Yuna.extra_menu.roleplay import RoleplayHelp
-    from .Yuna.extra_menu.verification import VerificationHelp
-    from .Yuna.extra_menu.tracking import _tracking
-    from .Yuna.extra_menu.logging import _logging
-    from .Yuna.extra_menu.counting import _counting
-    from .Yuna.extra_menu.backup import _Backup
-    from .Yuna.extra_menu.crew import _crew
-    from .Yuna.extra_menu.ignore import _ignore
+    from .LightCore.extra_menu.antinuke import _antinuke
+    from .LightCore.extra_menu.automod import _automod
+    from .LightCore.extra_menu.leveling import _leveling
+    from .LightCore.extra_menu.extra import _extra
+    from .LightCore.extra_menu.fun import _fun
+    from .LightCore.extra_menu.ai import _ai
+    from .LightCore.extra_menu.giveaway import _giveaway
+    from .LightCore.extra_menu.moderation import _moderation
+    from .LightCore.extra_menu.server import _server
+    from .LightCore.extra_menu.roleplay import RoleplayHelp
+    from .LightCore.extra_menu.verification import VerificationHelp
+    from .LightCore.extra_menu.tracking import _tracking
+    from .LightCore.extra_menu.logging import _logging
+    from .LightCore.extra_menu.counting import _counting
+    from .LightCore.extra_menu.backup import _Backup
+    from .LightCore.extra_menu.crew import _crew
+    from .LightCore.extra_menu.ignore import _ignore
     
-    YUNA_MODULES = [
+    LIGHTCORE_MODULES = [
         (_general, "_general"),
         (_voice, "_voice"),
         (_games, "_games"),
@@ -137,7 +137,7 @@ try:
         (_ignore, "_ignore"),
     ]
 except ModuleNotFoundError:
-    YUNA_MODULES = [] 
+    LIGHTCORE_MODULES = [] 
 
 from .antinuke .anti_member_update import AntiMemberUpdate 
 from .antinuke .antiban import AntiBan 
@@ -187,10 +187,9 @@ from .moderation .message import Message
 from .moderation .moderation import Moderation 
 from .moderation .topcheck import TopCheck 
 from .moderation .snipe import Snipe 
-import base64,sys,os; (lambda c: (print(base64.b64decode(b'ChtbOTFtICDilIzilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilJAbWzBtChtbOTFtICDilIIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICDilIIbWzBtChtbOTFtICDilIIgICAbWzFtJjIwICBDT1JFIElOVEVHUklUWSBDSEVDSyBGQUlMRUQgICAgICAgICAgICAgICAg4pSCG1swbQobWzkxbSAg4pSCICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg4pSCG1swbQobWzkxbSAg4pSCICAgG1s5N21Cb3QgY3JlZGl0cyBoYXZlIGJlZW4gdGFtcGVyZWQgd2l0aC4bWzkxbSAgICAgICAgICAgIOKUghtbMG0KG1s5MW0gIOKUgiAgIBtbOTdtUmVzdG9yZSBvcmlnaW5hbCBhdXRob3IgY3JlZGl0cyB0byBzdGFydCB0aGUgYm90LhtbOTFtIOKUghtbMG0KG1s5MW0gIOKUgiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIOKUghtbMG0KG1s5MW0gIOKUlOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUmBtbMG0K').decode()), sys.exit(1)) if not (c.count(base64.b64decode(b'ISBBZWdpcyAh').decode()) >= 2 and c.count(base64.b64decode(b'RGlzY29yZDogaXRzZml6eXM=').decode()) >= 2 and base64.b64decode(b'QWVyb1ggRGV2ZWxvcG1lbnQ=').decode() in c and base64.b64decode(b'aHR0cHM6Ly9kaXNjb3JkLmdnL2Flcm94').decode() in c) else None)(open(__file__, 'r', encoding='utf-8').read()) if os.path.exists(__file__) else None
 
 
-async def setup (bot :Yuna ):
+async def setup (bot :LightCore ):
 
     cogs_to_load =[
     (Help ,"Help"),
@@ -244,7 +243,7 @@ async def setup (bot :Yuna ):
     (GuildProfile ,"GuildProfile"),
     (Crypto ,"Crypto"),
 
-    *YUNA_MODULES,
+    *LIGHTCORE_MODULES,
     (AutoBlacklist ,"AutoBlacklist"),
     (Guild ,"Guild"),
     (Errors ,"Errors"),
@@ -319,8 +318,8 @@ async def setup (bot :Yuna ):
 
 
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """

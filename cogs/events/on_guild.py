@@ -1,11 +1,11 @@
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
 from discord .ext import commands 
-from core import Yuna ,Cog 
+from core import LightCore ,Cog 
 from utils .Tools import getConfig 
 import discord 
 import logging 
@@ -17,10 +17,10 @@ format ="\x1b[38;5;197m[\x1b[0m%(asctime)s\x1b[38;5;197m]\x1b[0m -> \x1b[38;5;19
 datefmt ="%H:%M:%S",
 )
 
-client =Yuna ()
+client =LightCore ()
 
 class Guild (Cog ):
-    def __init__ (self ,client :Yuna ):
+    def __init__ (self ,client :LightCore ):
         self .client =client 
 
     @client .event 
@@ -153,8 +153,8 @@ class Guild (Cog ):
 
 
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """

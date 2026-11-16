@@ -1,7 +1,7 @@
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """
 
@@ -32,7 +32,7 @@ class PersonalityModal (discord .ui .Modal ,title ="Set Your AI Personality"):
         self .ai_cog =ai_cog 
 
 
-        default_prompt ="""You are Yuna, an intelligent and caring Discord bot assistant created by solcodez and hiro.null! 💕
+        default_prompt ="""You are LightCore, an intelligent and caring Discord bot assistant created by LightCore Development! 💕
 
 CORE PERSONALITY:
 - Intelligent, helpful, and genuinely caring about users
@@ -80,7 +80,7 @@ Ready to have meaningful conversations and help with anything you need! 💖"""
 
         self .personality_input =discord .ui .TextInput (
         label ="Your AI Personality",
-        placeholder ="Describe how you want Yuna to respond to you...",
+        placeholder ="Describe how you want LightCore to respond to you...",
         default =display_text ,
         style =discord .TextStyle .paragraph ,
         max_length =2000 ,
@@ -417,19 +417,19 @@ class AI (commands .Cog ):
 
                 system_context .append ({
                 "role":"system",
-                "content":"You are a Discord bot with many features including moderation, entertainment, music, games, AI capabilities, and utilities. Support server: https://discord.gg/JxCFmz9nZP"
+                "content":"You are a Discord bot with many features including moderation, entertainment, music, games, AI capabilities, and utilities. Support server: https://discord.gg/8qe98sAGs9"
                 })
             else :
 
                 system_context .append ({
                 "role":"system",
-                "content":f"""You are Yuna, an intelligent Discord bot created by solcodez and hiro.null. 
+                "content":f"""You are LightCore, an intelligent Discord bot created by LightCore Development. 
 
 You have a caring, helpful personality and can remember conversations with users. You have many features including moderation, entertainment, music, games, AI capabilities, and utilities.
 
 Be natural, conversational, and genuine in your responses. Don't be overly formal or robotic. Use the conversation history to provide personalized responses that feel like talking to a real friend who happens to be very knowledgeable and helpful.
 
-Support server: https://discord.gg/JxCFmz9nZP"""
+Support server: https://discord.gg/8qe98sAGs9"""
                 })
 
 
@@ -1005,8 +1005,8 @@ Support server: https://discord.gg/JxCFmz9nZP"""
 async def setup (bot ):
     await bot .add_cog (AI (bot ))
 """
-: ! Aegis !
-    + Discord: itsfizys
-    + Community: https://discord.gg/aerox (AeroX Development )
+: ! LightCore !
+    + Discord: lightcore
+    + Community: https://discord.gg/8qe98sAGs9 (LightCore Development )
     + for any queries reach out Community or DM me.
 """

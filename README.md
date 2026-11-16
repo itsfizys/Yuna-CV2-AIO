@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🤖 Yuna Discord Bot — Component V2
+# 🤖 LightCore Discord Bot — Component V2
 
 
 *A premium multipurpose Discord bot featuring high-end Antinuke, Automod, and next-gen UI.*
@@ -13,9 +13,9 @@
 
 ---
 
-## ✨ What is Yuna?
+## ✨ What is LightCore?
 
-**Yuna** is a state-of-the-art multipurpose Discord bot designed for performance and security. Powered by the **Component V2** architecture, Yuna delivers a premium user experience with sleek layouts and advanced functionality.
+**LightCore** is a state-of-the-art multipurpose Discord bot designed for performance and security. Powered by the **Component V2** architecture, LightCore delivers a premium user experience with sleek layouts and advanced functionality.
 
 **Current Stats:**
 - 🛠️ **99 Cogs** loaded with specialized logic.
@@ -46,8 +46,73 @@
 
 4. **Run the bot**
    ```bash
-   python aerox.py
+   python LightCore.py
    ```
+
+## ☁️ Deploying on Render — Web Service (free tier)
+
+A Discord bot is a background process, so Render's default web-service start command (`gunicorn your_application.wsgi`) fails with `gunicorn: command not found`. LightCore fixes that by opening a real HTTP port while it runs.
+
+| Setting | Value |
+| --- | --- |
+| Type | **Web Service** |
+| Runtime | Python |
+| Build Command | `pip install -r requirements.txt` |
+| Start Command | `python LightCore.py` |
+| Health Check Path | `/health` |
+| Plan | Free (or higher) |
+
+`render.yaml` in this repo already contains exactly that — **New → Blueprint → pick this repo** and it configures itself.
+
+### Why the health server exists
+
+`utils/health.py` binds `$PORT` (only when the variable is set) and serves:
+
+| Path | Response |
+| --- | --- |
+| `/` | plain-text "LightCore is running." |
+| `/health`, `/healthz` | JSON — `status`, `bot` tag, `guilds`, `latency_ms` |
+
+The bot still talks to Discord over the gateway; the HTTP port exists purely so the host's port scan and health check pass. Locally nothing changes — no `PORT`, no listener.
+
+### Environment variables
+
+```env
+TOKEN=your_bot_token        # required
+OWNER_IDS=123456789012345678 # required for owner commands
+BOT_PREFIX=&                 # optional, defaults to &
+WEBHOOK_URL=                 # optional, command logging off when unset
+GROQ_API_KEY=                # optional, AI commands
+```
+
+### Free-tier caveats (important)
+
+1. **Spin-down.** Free instances sleep after a period without inbound traffic, which also drops the Discord gateway — commands go silent. Set a keep-alive so LightCore pings itself:
+   ```env
+   RENDER_EXTERNAL_URL          # set automatically by Render
+   KEEP_ALIVE=1                 # default; set 0 to disable
+   KEEP_ALIVE_INTERVAL=600      # seconds
+   ```
+   Or add a Render **Cron Job** hitting `https://<service>.onrender.com/health` every 10 minutes.
+2. **Ephemeral disk.** SQLite files in `db/` reset on every deploy, so prefixes, levels and tickets vanish. Render → your service → **Disks** → Add Disk (mount e.g. `/var/data`, 1 GB). This repo reads the `db/` paths from the working directory, so the simplest fix is to create a symlink at build time:
+   ```bash
+   # Build Command
+   pip install -r requirements.txt && mkdir -p /var/data/db && ln -sfn /var/data/db db
+   ```
+   Without a disk the bot still runs — it just forgets state between deploys.
+3. **One service only.** Run a single instance — two processes sharing one bot token will double-respond to commands.
+4. **Shutdown.** `SIGTERM` is handled so deploys close the gateway cleanly instead of crashing.
+
+### Other hosts (Railway / Fly / VPS)
+
+Any long-lived process works — no port or web framework required:
+
+```bash
+pip install -r requirements.txt
+python LightCore.py
+```
+
+`Procfile` declares both `web:` and `worker:` entries, so platforms that read it pick the right one. `runtime.txt` pins Python 3.11.9.
 
 ## ⚙️ Configuration Guide
 
@@ -69,10 +134,10 @@ BOT_PREFIX=!
 
 ### 👨‍💻 Development Team
 
-**Developer:** Aegis  
-**Discord:** `itsfizys`  
-**Community:** AeroX Development  
-**Discord Server:** [discord.gg/aerox](https://discord.gg/aerox)
+**Developer:** LightCore  
+**Discord:** `lightcore`  
+**Community:** LightCore Development  
+**Discord Server:** [discord.gg/8qe98sAGs9](https://discord.gg/8qe98sAGs9)
 
 ---
 
@@ -96,7 +161,7 @@ For licensing inquiries: https://discord.gg/odx
 
 ---
 
-**Made with ❤️ by [AeroX Development](https://discord.gg/aerox)**
+**Made with ❤️ by [LightCore Development](https://discord.gg/8qe98sAGs9)**
 
 *Based on Olympus • Powered by Python & Discord.py • Component V2 Interface*
 
